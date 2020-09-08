@@ -28,7 +28,7 @@ class CreateTransactionService {
     });
 
     if (!cat) {
-      cat = await categoriesRepository.create({ title: category });
+      cat = categoriesRepository.create({ title: category });
       await categoriesRepository.save(cat);
     }
 
@@ -36,13 +36,13 @@ class CreateTransactionService {
       throw new AppError('Negative Balance', 400);
     }
 
-    const transaction = await transactionsRepository.create({
+    const transaction = transactionsRepository.create({
       title,
       type,
       value,
       category_id: cat.id,
     });
-    transactionsRepository.save(transaction);
+    await transactionsRepository.save(transaction);
     return transaction;
   }
 }

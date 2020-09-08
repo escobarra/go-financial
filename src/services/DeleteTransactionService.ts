@@ -13,7 +13,7 @@ class DeleteTransactionService {
     if (!transaction) {
       throw new AppError('Cant remove this repo. Repo not found.', 404);
     }
-    transactionsRepository.remove(transaction);
+    await transactionsRepository.remove(transaction);
   }
 }
 
